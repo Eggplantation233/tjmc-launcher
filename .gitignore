@@ -122,3 +122,6 @@ apps/app/resources/blockbench-skin/
 .tauri-build.log
 .yggdrasil-connect.txt
 Yggdrasil-Connect.pdf
+
+.agents/
+.claude/

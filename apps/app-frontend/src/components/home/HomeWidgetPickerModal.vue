@@ -13,6 +13,7 @@ import {
 	MessageIcon,
 	SearchIcon,
 	ServerIcon,
+	WikiIcon,
 } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, NewModal, StyledInput, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, ref } from 'vue'
@@ -114,6 +115,14 @@ const messages = defineMessages({
 		id: 'app.home.widgets.server-info-description',
 		defaultMessage: 'Shows MOTD, version, players and latency for chosen servers.',
 	},
+	minecraftWiki: {
+		id: 'app.home.widgets.minecraft-wiki',
+		defaultMessage: 'Minecraft latest version',
+	},
+	minecraftWikiDescription: {
+		id: 'app.home.widgets.minecraft-wiki-description',
+		defaultMessage: 'Shows the latest Java release, theme name and artwork from Minecraft Wiki.',
+	},
 	instance: { id: 'app.home.widgets.instance', defaultMessage: 'Single instance' },
 	instanceDescription: {
 		id: 'app.home.widgets.instance-description',
@@ -185,6 +194,12 @@ const catalogSections = computed(() => [
 				label: formatMessage(messages.serverInfo),
 				description: formatMessage(messages.serverInfoDescription),
 				icon: ServerIcon,
+			},
+			{
+				kind: 'minecraft-wiki' as const,
+				label: formatMessage(messages.minecraftWiki),
+				description: formatMessage(messages.minecraftWikiDescription),
+				icon: WikiIcon,
 			},
 		],
 	},

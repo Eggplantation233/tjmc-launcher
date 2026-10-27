@@ -2309,6 +2309,12 @@
   "app.home.widgets.server-info-description": {
     "message": "Show MOTD, version, player count and latency for chosen servers."
   },
+  "app.home.widgets.minecraft-wiki": {
+    "message": "Minecraft latest version"
+  },
+  "app.home.widgets.minecraft-wiki-description": {
+    "message": "Show the latest Java release, theme name and artwork from Minecraft Wiki."
+  },
   "app.home.widgets.pinned-worlds": {
     "message": "All favorite worlds"
   },
@@ -2374,6 +2380,24 @@
   },
   "app.home.server-info.latency": {
     "message": "{ping} ms"
+  },
+  "app.home.minecraft-wiki.title": {
+    "message": "Minecraft Latest Version"
+  },
+  "app.home.minecraft-wiki.loading": {
+    "message": "Loading the latest Java version…"
+  },
+  "app.home.minecraft-wiki.empty": {
+    "message": "No latest version is available."
+  },
+  "app.home.minecraft-wiki.failed": {
+    "message": "Could not load the latest version."
+  },
+  "app.home.minecraft-wiki.open-theme": {
+    "message": "Open version theme"
+  },
+  "app.home.minecraft-wiki.open-version": {
+    "message": "Open Java version page"
   },
   "app.home.widgets.size": {
     "message": "Size {size}"
@@ -2461,6 +2485,9 @@
   },
   "app.instance-item.view-instance": {
     "message": "View instance"
+  },
+  "app.instance-item.unpin": {
+    "message": "Unpin from Home"
   },
   "app.instance.back": {
     "message": "Back to instance"

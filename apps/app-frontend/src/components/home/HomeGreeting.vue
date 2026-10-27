@@ -12,11 +12,13 @@ import type { HomeWidgetSize } from '@/components/home/home-dashboard'
 import { getTimeBucket, type HomeTimeBucket } from '@/components/home/home-utils'
 import { getStartupNotification } from '@/helpers/remote-notifications'
 
-withDefaults(
+const props = withDefaults(
 	defineProps<{
+		playerName?: string | null
 		dashboardSize?: HomeWidgetSize | null
 	}>(),
 	{
+		playerName: null,
 		dashboardSize: null,
 	},
 )
@@ -29,7 +31,43 @@ const messages = defineMessages({
 		id: 'app.home.date-notice.fallback',
 		defaultMessage: '欢迎来到 TJMC',
 	},
+	greetingWithPlayer: {
+		id: 'app.home.greeting.minimal.with-player',
+		defaultMessage: '{greeting}, {name}',
+	},
+	minimalLateNight: {
+		id: 'app.home.greeting.minimal.late-night',
+		defaultMessage: 'Good evening',
+	},
+	minimalDawn: {
+		id: 'app.home.greeting.minimal.dawn',
+		defaultMessage: 'Good morning',
+	},
+	minimalMorning: {
+		id: 'app.home.greeting.minimal.morning',
+		defaultMessage: 'Good morning',
+	},
+	minimalAfternoon: {
+		id: 'app.home.greeting.minimal.afternoon',
+		defaultMessage: 'Good afternoon',
+	},
+	minimalEvening: {
+		id: 'app.home.greeting.minimal.evening',
+		defaultMessage: 'Good evening',
+	},
+	minimalNight: {
+		id: 'app.home.greeting.minimal.night',
+		defaultMessage: 'Good evening',
+	},
 })
+const minimalGreetings = {
+	'late-night': messages.minimalLateNight,
+	dawn: messages.minimalDawn,
+	morning: messages.minimalMorning,
+	afternoon: messages.minimalAfternoon,
+	evening: messages.minimalEvening,
+	night: messages.minimalNight,
+}
 const newsBackgrounds: Record<HomeTimeBucket, string> = {
 	'late-night': lateNightBackground,
 	dawn: dawnBackground,
@@ -51,6 +89,15 @@ const dateLabel = computed(() =>
 const newsBackground = computed(() => newsBackgrounds[getTimeBucket(now.value)])
 const subtitle = computed(() => noticeText.value || formatMessage(messages.fallbackNotice))
 const shouldScroll = computed(() => subtitle.value.length > 24)
+const greeting = computed(() => formatMessage(minimalGreetings[getTimeBucket(now.value)]))
+const welcomeText = computed(() =>
+	props.playerName
+		? formatMessage(messages.greetingWithPlayer, {
+				name: props.playerName,
+				greeting: greeting.value,
+			})
+		: greeting.value,
+)
 
 const updateClock = () => {
 	now.value = new Date()
@@ -77,22 +124,29 @@ onUnmounted(() => window.clearInterval(timer))
 		</div>
 		<div class="home-date-notice__beta">●beta</div>
 
-		<div class="home-date-notice__news-strip">
-			<div class="home-date-notice__breaking">
-				<span>Breaking</span>
-				<span>News</span>
+		<div class="home-date-notice__news-stack">
+			<div class="home-date-notice__titlebar">
+				<div class="home-date-notice__breaking">
+					<span>Breaking</span>
+					<span>News</span>
+				</div>
+				<div class="home-date-notice__welcome" :title="welcomeText">
+					{{ welcomeText }}
+				</div>
 			</div>
-			<div class="home-date-notice__viewport" :title="subtitle">
-				<div
-					class="home-date-notice__track"
-					:class="{ 'is-scrolling': shouldScroll }"
-					role="status"
-					:aria-label="subtitle"
-				>
-					<span class="home-date-notice__text">{{ subtitle }}</span>
-					<span v-if="shouldScroll" class="home-date-notice__text" aria-hidden="true">
-						{{ subtitle }}
-					</span>
+			<div class="home-date-notice__news-strip">
+				<div class="home-date-notice__viewport" :title="subtitle">
+					<div
+						class="home-date-notice__track"
+						:class="{ 'is-scrolling': shouldScroll }"
+						role="status"
+						:aria-label="subtitle"
+					>
+						<span class="home-date-notice__text">{{ subtitle }}</span>
+						<span v-if="shouldScroll" class="home-date-notice__text" aria-hidden="true">
+							{{ subtitle }}
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -158,18 +212,21 @@ onUnmounted(() => window.clearInterval(timer))
 	color: #fff;
 }
 
-.home-date-notice__news-strip {
+.home-date-notice__news-stack {
 	position: absolute;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	z-index: 2;
 	display: flex;
+	flex-direction: column;
+}
+
+.home-date-notice__titlebar {
+	display: flex;
 	min-width: 0;
-	height: 2.125rem;
+	height: 1.9125rem;
 	align-items: stretch;
-	background: #e5daf5;
-	color: #2d2435;
 }
 
 .home-date-notice__breaking {
@@ -188,6 +245,32 @@ onUnmounted(() => window.clearInterval(timer))
 	text-transform: uppercase;
 	text-shadow: none;
 	-webkit-text-stroke: 0;
+}
+
+.home-date-notice__welcome {
+	display: block;
+	min-width: 0;
+	flex: 1;
+	overflow: hidden;
+	padding: 0 0.75rem;
+	background: rgb(255 255 255 / 92%);
+	color: #2d2435;
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.9125rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-shadow: none;
+	-webkit-text-stroke: 0;
+}
+
+.home-date-notice__news-strip {
+	display: flex;
+	min-width: 0;
+	height: 1.4rem;
+	align-items: stretch;
+	background: #e5daf5;
+	color: #2d2435;
 }
 
 .home-date-notice__viewport {
@@ -224,9 +307,9 @@ onUnmounted(() => window.clearInterval(timer))
 
 .home-date-notice__text {
 	display: block;
-	font-size: 0.875rem;
+	font-size: 0.75rem;
 	font-weight: 700;
-	line-height: 1.35;
+	line-height: 1.25rem;
 	color: #2d2435;
 	text-shadow: none;
 	-webkit-text-stroke: 0;

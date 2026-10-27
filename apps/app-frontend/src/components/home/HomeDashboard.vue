@@ -53,6 +53,7 @@ import { provideHomeDashboardRuntime } from '@/components/home/home-dashboard-ru
 import HomeAnnouncement from '@/components/home/HomeAnnouncement.vue'
 import HomeCalendar from '@/components/home/HomeCalendar.vue'
 import HomeGreeting from '@/components/home/HomeGreeting.vue'
+import HomeMinecraftWiki from '@/components/home/HomeMinecraftWiki.vue'
 import HomePinnedInstances from '@/components/home/HomePinnedInstances.vue'
 import HomeRecentWorlds from '@/components/home/HomeRecentWorlds.vue'
 import HomeServerInfo from '@/components/home/HomeServerInfo.vue'
@@ -598,6 +599,7 @@ defineExpose({ openWidgetPicker, setLayout })
 						<div class="home-widget-content min-w-0 min-h-0 flex-1 overflow-hidden p-4">
 							<HomeGreeting
 								v-if="widget.kind === 'greeting'"
+								:player-name="playerName"
 								:dashboard-size="effectiveSize(widget)"
 							/>
 							<HomeAnnouncement
@@ -629,6 +631,10 @@ defineExpose({ openWidgetPicker, setLayout })
 								"
 								:dashboard-size="effectiveSize(widget)"
 								@update-addresses="updateServerAddresses(widget.id, $event)"
+							/>
+							<HomeMinecraftWiki
+								v-else-if="widget.kind === 'minecraft-wiki'"
+								:dashboard-size="effectiveSize(widget)"
 							/>
 							<HomeShortcutWidget
 								v-else

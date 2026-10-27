@@ -3,6 +3,7 @@ import {
 	EyeIcon,
 	FolderOpenIcon,
 	MoreVerticalIcon,
+	PinIcon,
 	PlayIcon,
 	SpinnerIcon,
 	StopCircleIcon,
@@ -47,6 +48,7 @@ const messages = defineMessages({
 		defaultMessage: 'Loading modpack...',
 	},
 	viewInstance: { id: 'app.instance-item.view-instance', defaultMessage: 'View instance' },
+	unpin: { id: 'app.instance-item.unpin', defaultMessage: 'Unpin from Home' },
 	alreadyOpen: {
 		id: 'app.instance-item.already-open',
 		defaultMessage: 'Instance is already open',
@@ -61,14 +63,16 @@ const router = useRouter()
 
 const emit = defineEmits<{
 	(e: 'play' | 'stop'): void
+	(e: 'pinned-change', instance: GameInstance, pinned: boolean): void
 }>()
 
 const props = defineProps<{
 	instance: GameInstance
-	lastPlayed: Dayjs
+	lastPlayed?: Dayjs
 	flat?: boolean
 	playing?: boolean
 	dashboardDensity?: 'compact' | 'comfortable'
+	pinned?: boolean
 }>()
 
 const loadingModpack = ref(!!props.instance.link?.project_id)
@@ -97,6 +101,25 @@ const loader = computed(() => {
 const loading = ref(false)
 const internalPlaying = ref(false)
 const isPlaying = computed(() => props.playing ?? internalPlaying.value)
+const menuOptions = computed(() => [
+	{
+		id: 'open-instance',
+		shown: !!props.instance.id,
+		action: () => router.push(encodeURI(`/instance/${props.instance.id}`)),
+	},
+	{
+		id: 'open-folder',
+		action: () => showInstanceInFolder(props.instance.id),
+	},
+	...(props.pinned
+		? [
+				{
+					id: 'unpin',
+					action: () => emit('pinned-change', props.instance, false),
+				},
+			]
+		: []),
+])
 
 const play = async (event: MouseEvent) => {
 	event?.stopPropagation()
@@ -188,7 +211,7 @@ onUnmounted(() => {
 				</div>
 				<div class="flex items-center gap-2 text-sm text-secondary">
 					<div
-						v-tooltip="instance.lastPlayed ? formatDateTime(instance.lastPlayed) : null"
+						v-tooltip="lastPlayed ? formatDateTime(lastPlayed) : null"
 						class="w-fit shrink-0"
 						:class="{ 'cursor-help smart-clickable:allow-pointer-events': lastPlayed }"
 					>
@@ -249,19 +272,7 @@ onUnmounted(() => {
 					</button>
 				</ButtonStyled>
 				<ButtonStyled circular type="transparent">
-					<OverflowMenu
-						:options="[
-							{
-								id: 'open-instance',
-								shown: !!instance.id,
-								action: () => router.push(encodeURI(`/instance/${instance.id}`)),
-							},
-							{
-								id: 'open-folder',
-								action: () => showInstanceInFolder(instance.id),
-							},
-						]"
-					>
+					<OverflowMenu :options="menuOptions">
 						<MoreVerticalIcon aria-hidden="true" />
 						<template #open-instance>
 							<EyeIcon aria-hidden="true" />
@@ -270,6 +281,10 @@ onUnmounted(() => {
 						<template #open-folder>
 							<FolderOpenIcon aria-hidden="true" />
 							{{ formatMessage(commonMessages.openFolderButton) }}
+						</template>
+						<template #unpin>
+							<PinIcon class="rotate-45" aria-hidden="true" />
+							{{ formatMessage(messages.unpin) }}
 						</template>
 					</OverflowMenu>
 				</ButtonStyled>

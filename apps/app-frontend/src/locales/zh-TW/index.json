@@ -2168,6 +2168,12 @@
   "app.home.widgets.server-info-description": {
     "message": "查看指定伺服器的 MOTD、版本、玩家人數和延遲。"
   },
+  "app.home.widgets.minecraft-wiki": {
+    "message": "Minecraft 最新版本"
+  },
+  "app.home.widgets.minecraft-wiki-description": {
+    "message": "展示 Minecraft Wiki 的 Java 版最新主題、版本號與示意圖。"
+  },
   "app.home.widgets.pinned-worlds": {
     "message": "全部收藏世界"
   },
@@ -2233,6 +2239,24 @@
   },
   "app.home.server-info.latency": {
     "message": "{ping} ms"
+  },
+  "app.home.minecraft-wiki.title": {
+    "message": "Minecraft 最新版本"
+  },
+  "app.home.minecraft-wiki.loading": {
+    "message": "正在載入最新 Java 版資訊…"
+  },
+  "app.home.minecraft-wiki.empty": {
+    "message": "暫無可展示的最新版本。"
+  },
+  "app.home.minecraft-wiki.failed": {
+    "message": "無法取得最新版本資訊。"
+  },
+  "app.home.minecraft-wiki.open-theme": {
+    "message": "開啟版本主題"
+  },
+  "app.home.minecraft-wiki.open-version": {
+    "message": "開啟 Java 版頁面"
   },
   "app.home.widgets.size": {
     "message": "尺寸 {size}"
@@ -2317,6 +2341,9 @@
   },
   "app.instance-item.view-instance": {
     "message": "查看實例"
+  },
+  "app.instance-item.unpin": {
+    "message": "取消固定"
   },
   "app.instance.back": {
     "message": "返回實例"

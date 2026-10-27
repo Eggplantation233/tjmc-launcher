@@ -64,6 +64,7 @@ const DEFAULT_FRIENDS_URL = 'https://skin.tongji-mc.cn/api/launcher/friends'
 const DEFAULT_FRIENDS_INTEROP_URL = 'https://skin.tongji-mc.cn/api/launcher/interop/v1/friends'
 const DEFAULT_ANNOUNCEMENTS_URL = 'https://skin.tongji-mc.cn/api/launcher/announcements'
 const DEFAULT_NOTIFICATIONS_URL = 'https://skin.tongji-mc.cn/api/launcher/notifications'
+const DEFAULT_MINECRAFT_WIKI_URL = 'https://skin.tongji-mc.cn/api/launcher/wiki/latest'
 const DEFAULT_UPDATE_URL = 'https://skin.tongji-mc.cn/api/launcher/update'
 
 const manifestUrl = (import.meta.env.VITE_TJMC_MANIFEST_URL ?? DEFAULT_MANIFEST_URL).trim()
@@ -78,6 +79,9 @@ const announcementsUrl = (
 ).trim()
 const notificationsUrl = (
 	import.meta.env.VITE_TJMC_NOTIFICATIONS_URL ?? DEFAULT_NOTIFICATIONS_URL
+).trim()
+const minecraftWikiUrl = (
+	import.meta.env.VITE_TJMC_MINECRAFT_WIKI_URL ?? DEFAULT_MINECRAFT_WIKI_URL
 ).trim()
 const updateUrl = (import.meta.env.VITE_TJMC_UPDATE_URL ?? DEFAULT_UPDATE_URL).trim()
 
@@ -97,5 +101,6 @@ export const TjmcConfig = Object.freeze({
 	friendsInteropUrl: trimTrailingSlash(friendsInteropUrl),
 	announcementsUrl: trimTrailingSlash(announcementsUrl),
 	notificationsUrl: trimTrailingSlash(notificationsUrl),
+	minecraftWikiUrl: trimTrailingSlash(minecraftWikiUrl),
 	updateUrl: trimTrailingSlash(updateUrl),
 })

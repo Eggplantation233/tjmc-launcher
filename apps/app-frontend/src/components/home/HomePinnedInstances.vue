@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { GridIcon, PinIcon, RightArrowIcon } from '@modrinth/assets'
-import { ButtonStyled, defineMessages, injectNotificationManager, useVIntl } from '@modrinth/ui'
+import { GridIcon, PinIcon } from '@modrinth/assets'
+import { defineMessages, injectNotificationManager, useVIntl } from '@modrinth/ui'
+import dayjs from 'dayjs'
 import { computed } from 'vue'
 
 import type { HomeWidgetSize } from '@/components/home/home-dashboard'
 import { useHomeDashboardRuntime } from '@/components/home/home-dashboard-runtime'
-import HomeInstanceCard from '@/components/home/HomeInstanceCard.vue'
+import InstanceItem from '@/components/ui/world/InstanceItem.vue'
 import { set_pinned } from '@/helpers/instance'
 import type { GameInstance } from '@/helpers/types'
 
@@ -27,10 +28,6 @@ const messages = defineMessages({
 		id: 'app.home.instances.pinned-empty',
 		defaultMessage: 'Pin an instance from its card menu or the library to keep it here.',
 	},
-	viewAllInstances: {
-		id: 'app.home.instances.view-all',
-		defaultMessage: 'View all instances',
-	},
 })
 
 const pinnedInstances = computed(() =>
@@ -39,12 +36,6 @@ const pinnedInstances = computed(() =>
 		.slice()
 		.sort((a, b) => new Date(b.pinned_at ?? 0).getTime() - new Date(a.pinned_at ?? 0).getTime()),
 )
-const cardLayout = computed(() => {
-	if (props.dashboardSize === '1x1') return 'spotlight' as const
-	if (props.dashboardSize === '2x2') return 'tile' as const
-	return 'row' as const
-})
-
 async function updatePinned(instance: GameInstance, pinned: boolean) {
 	await set_pinned(instance.id, pinned).catch(handleError)
 }
@@ -60,24 +51,20 @@ async function updatePinned(instance: GameInstance, pinned: boolean) {
 			<h2>
 				{{ formatMessage(messages.pinnedInstances) }}
 			</h2>
-			<ButtonStyled v-if="dashboardSize !== '1x1'" type="transparent" size="small" class="ml-auto">
-				<router-link to="/library">
-					<span v-if="dashboardSize === '2x2'">{{ formatMessage(messages.viewAllInstances) }}</span>
-					<RightArrowIcon aria-hidden="true" />
-				</router-link>
-			</ButtonStyled>
 		</div>
 		<div
 			v-if="pinnedInstances.length > 0"
 			class="home-instance-list grid min-w-0 min-h-0 flex-1 grid-auto-rows-max gap-1 overflow-x-hidden overflow-y-auto pr-1"
 		>
-			<HomeInstanceCard
+			<InstanceItem
 				v-for="instance in pinnedInstances"
 				:key="instance.id"
 				:instance="instance"
-				:pinned="true"
-				:layout="cardLayout"
+				:last-played="instance.last_played ? dayjs(instance.last_played) : undefined"
+				:flat="dashboard"
 				:playing="runningInstanceIds.includes(instance.id)"
+				dashboard-density="compact"
+				pinned
 				@pinned-change="updatePinned"
 			/>
 		</div>
@@ -99,20 +86,6 @@ async function updatePinned(instance: GameInstance, pinned: boolean) {
 	letter-spacing: 0;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-
-.home-pinned-instances[data-size='2x1'] .home-instance-list,
-.home-pinned-instances[data-size='2x2'] .home-instance-list {
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	column-gap: 0.5rem;
-}
-
-.home-pinned-instances[data-size='1x1'] {
-	gap: 0.375rem;
-}
-
-.home-pinned-instances[data-size='1x1'] .home-widget-heading {
-	height: 1.5rem;
 }
 
 .home-widget-empty {

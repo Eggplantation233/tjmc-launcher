@@ -1,8 +1,8 @@
-export const HOME_DASHBOARD_VERSION = 2 as const
-export const HOME_DASHBOARD_LEGACY_VERSIONS = [1] as const
+export const HOME_DASHBOARD_VERSION = 3 as const
+export const HOME_DASHBOARD_LEGACY_VERSIONS = [1, 2] as const
 export const HOME_WIDGET_LAYOUTS = ['grid', 'free'] as const
 export const HOME_WIDGET_STANDARD_SIZES = ['1x1', '2x1', '1x2', '2x2'] as const
-export const HOME_WIDGET_SIZES = [...HOME_WIDGET_STANDARD_SIZES, '3x1', '3x2'] as const
+export const HOME_WIDGET_SIZES = [...HOME_WIDGET_STANDARD_SIZES, '3x1', '3x2', '1x4'] as const
 export const HOME_WIDGET_GRID_GAP = 16
 export const HOME_WIDGET_GRID_ROW_HEIGHT = 160
 export const HOME_RECENT_LIMIT_OPTIONS = [2, 4, 6, 8] as const
@@ -33,6 +33,7 @@ export type HomeWidgetKind =
 	| 'calendar'
 	| 'pinned-instances'
 	| 'server-status'
+	| 'minecraft-wiki'
 	| 'instance'
 	| 'world'
 	| 'server'
@@ -90,8 +91,9 @@ export const HOME_WIDGET_SIZE_OPTIONS: Record<HomeWidgetKind, readonly HomeWidge
 	announcement: ['1x2', '2x2'],
 	recent: ['2x1', '2x2', '3x1', '3x2'],
 	calendar: ['1x2'],
-	'pinned-instances': ['1x2'],
-	'server-status': ['1x2'],
+	'pinned-instances': ['2x2'],
+	'server-status': ['1x4'],
+	'minecraft-wiki': ['2x2'],
 	instance: ['1x1', '2x1'],
 	world: ['1x1', '2x1'],
 	server: ['1x1', '2x1'],
@@ -102,8 +104,9 @@ export const HOME_WIDGET_DEFAULT_SIZE: Record<HomeWidgetKind, HomeWidgetSize> = 
 	announcement: '1x2',
 	recent: '2x2',
 	calendar: '1x2',
-	'pinned-instances': '1x2',
-	'server-status': '1x2',
+	'pinned-instances': '2x2',
+	'server-status': '1x4',
+	'minecraft-wiki': '2x2',
 	instance: '1x1',
 	world: '1x1',
 	server: '1x1',
@@ -159,10 +162,11 @@ export function createDefaultHomeDashboard(includeRecent = true): HomeDashboardC
 		widgets: [
 			createPlacement('greeting'),
 			createPlacement('announcement'),
-			createPlacement('calendar'),
+			createPlacement('server-status', '1x4'),
 			...(includeRecent ? [createPlacement('recent')] : []),
-			createPlacement('pinned-instances', '1x2'),
-			createPlacement('server-status', '1x2'),
+			createPlacement('calendar'),
+			createPlacement('pinned-instances', '2x2'),
+			createPlacement('minecraft-wiki', '2x2'),
 		],
 	}
 }
@@ -318,8 +322,9 @@ export function normalizeHomeDashboard(value: unknown): HomeDashboardConfig | nu
 		]
 	})
 
-	// Layouts saved before the announcement card existed are upgraded in place, so a
-	// customized arrangement keeps its widgets and simply gains the new card.
+	// Older layouts keep their customized arrangement while gaining cards introduced
+	// in later dashboard versions. Version 3 replaces the removed WeChat widget with
+	// the Minecraft Wiki release card.
 	if (
 		value.version !== HOME_DASHBOARD_VERSION &&
 		!widgets.some((widget) => widget.kind === 'announcement')
@@ -332,10 +337,51 @@ export function normalizeHomeDashboard(value: unknown): HomeDashboardConfig | nu
 		widgets.some((widget) => widget.kind === 'pinned-instances') &&
 		!widgets.some((widget) => widget.kind === 'server-status')
 	) {
-		widgets.push(createPlacement('server-status', '1x2'))
+		widgets.push(createPlacement('server-status', '1x4'))
 	}
 
-	return { version: HOME_DASHBOARD_VERSION, layout, widgets }
+	if (
+		widgets.some((widget) => widget.kind === 'greeting') &&
+		widgets.some((widget) => widget.kind === 'pinned-instances') &&
+		value.version !== HOME_DASHBOARD_VERSION &&
+		!widgets.some((widget) => widget.kind === 'minecraft-wiki')
+	) {
+		widgets.push(createPlacement('minecraft-wiki', '2x2'))
+	}
+
+	return {
+		version: HOME_DASHBOARD_VERSION,
+		layout,
+		widgets: arrangeInformationHomeWidgets(widgets),
+	}
+}
+
+function arrangeInformationHomeWidgets(widgets: HomeWidgetPlacement[]): HomeWidgetPlacement[] {
+	const arranged = [...widgets]
+
+	moveFirstWidgetAfterKind(arranged, 'server-status', 'announcement')
+	moveFirstWidgetAfterKind(arranged, 'recent', 'server-status')
+	moveFirstWidgetAfterKind(arranged, 'calendar', 'recent')
+	moveFirstWidgetAfterKind(arranged, 'pinned-instances', 'calendar')
+
+	return arranged
+}
+
+function moveFirstWidgetAfterKind(
+	widgets: HomeWidgetPlacement[],
+	movingKind: HomeWidgetKind,
+	anchorKind: HomeWidgetKind,
+): void {
+	const movingIndex = widgets.findIndex((widget) => widget.kind === movingKind)
+	if (movingIndex === -1) return
+
+	const [moving] = widgets.splice(movingIndex, 1)
+	const anchorIndex = widgets.findIndex((widget) => widget.kind === anchorKind)
+	if (anchorIndex === -1) {
+		widgets.splice(movingIndex, 0, moving)
+		return
+	}
+	widgets.splice(anchorIndex + 1, 0, moving)
 }
 
 export function replaceHomeDashboardWidgets(

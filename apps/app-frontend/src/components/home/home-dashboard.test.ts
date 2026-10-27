@@ -62,16 +62,16 @@ test('temporarily clamps wide widgets without changing their preferred size', ()
 
 test('adds, keeps fixed placements, reorders, and removes independent placements', () => {
 	const original = createDefaultHomeDashboard()
-	const pinnedInstances = original.widgets.find((widget) => widget.kind === 'pinned-instances')!
-	const duplicate = { ...pinnedInstances, id: 'duplicate-pinned-instances' }
+	const announcement = original.widgets.find((widget) => widget.kind === 'announcement')!
+	const duplicate = { ...announcement, id: 'duplicate-announcement' }
 	const added = addHomeWidget(original, duplicate)
 	assert.equal(added.widgets.length, original.widgets.length + 1)
-	assert.equal(added.widgets.filter((widget) => widget.kind === 'pinned-instances').length, 2)
+	assert.equal(added.widgets.filter((widget) => widget.kind === 'announcement').length, 2)
 
 	const moved = moveHomeWidget(added, added.widgets.length - 1, -1)
 	assert.equal(moved.widgets.at(-2)?.id, duplicate.id)
 	const resized = resizeHomeWidget(moved, duplicate.id, '2x2')
-	assert.equal(resized.widgets.find((widget) => widget.id === duplicate.id)?.size, '1x2')
+	assert.equal(resized.widgets.find((widget) => widget.id === duplicate.id)?.size, '2x2')
 	const removed = removeHomeWidget(resized, duplicate.id)
 	assert.deepEqual(removed.widgets, original.widgets)
 })
@@ -88,12 +88,31 @@ test('accepts draggable order and restores the complete default layout', () => {
 		[
 			{ kind: 'greeting', size: '2x2' },
 			{ kind: 'announcement', size: '1x2' },
-			{ kind: 'calendar', size: '1x2' },
+			{ kind: 'server-status', size: '1x4' },
 			{ kind: 'recent', size: '2x2' },
-			{ kind: 'pinned-instances', size: '1x2' },
-			{ kind: 'server-status', size: '1x2' },
+			{ kind: 'calendar', size: '1x2' },
+			{ kind: 'pinned-instances', size: '2x2' },
+			{ kind: 'minecraft-wiki', size: '2x2' },
 		],
 	)
+})
+
+test('upgrades a version 2 layout by replacing its removed card', () => {
+	const upgraded = normalizeHomeDashboard({
+		version: 2,
+		layout: 'grid',
+		widgets: [
+			{ id: 'greeting', kind: 'greeting', size: '2x2' },
+			{ id: 'pinned', kind: 'pinned-instances', size: '2x2' },
+			{ id: 'removed', kind: 'removed-card', size: '2x2' },
+		],
+	})
+
+	assert.equal(
+		upgraded?.widgets.some((widget) => widget.id === 'removed'),
+		false,
+	)
+	assert.equal(upgraded?.widgets.filter((widget) => widget.kind === 'minecraft-wiki').length, 1)
 })
 
 test('enables free layout from packed positions and preserves manual coordinates', () => {
@@ -202,10 +221,11 @@ test('packs widgets into the earliest available cells', () => {
 		[
 			{ column: 1, row: 1, effectiveColumns: 2, effectiveRows: 2 },
 			{ column: 3, row: 1, effectiveColumns: 1, effectiveRows: 2 },
-			{ column: 4, row: 1, effectiveColumns: 1, effectiveRows: 2 },
+			{ column: 4, row: 1, effectiveColumns: 1, effectiveRows: 4 },
 			{ column: 1, row: 3, effectiveColumns: 2, effectiveRows: 2 },
 			{ column: 3, row: 3, effectiveColumns: 1, effectiveRows: 2 },
-			{ column: 4, row: 3, effectiveColumns: 1, effectiveRows: 2 },
+			{ column: 1, row: 5, effectiveColumns: 2, effectiveRows: 2 },
+			{ column: 3, row: 5, effectiveColumns: 2, effectiveRows: 2 },
 		],
 	)
 })
