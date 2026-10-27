@@ -1,0 +1,668 @@
+{
+  "app.action-bar.downloading-java": {
+    "message": "جاز تنزيل إصدار جافا {version}"
+  },
+  "app.action-bar.downloading-update": {
+    "message": "تحميل التحديث"
+  },
+  "app.action-bar.downloads": {
+    "message": "التنزيلات"
+  },
+  "app.action-bar.hide-more-running-instances": {
+    "message": "إخفاء المزيد من الحالات قيد التشغيل"
+  },
+  "app.action-bar.make-primary-instance": {
+    "message": "إنشاء نسخة أساسية"
+  },
+  "app.action-bar.no-instances-running": {
+    "message": "لا توجد نسخ قيد التشغيل"
+  },
+  "app.action-bar.offline": {
+    "message": "غير متصل"
+  },
+  "app.action-bar.primary-instance": {
+    "message": "النسخة ألرئيسية"
+  },
+  "app.action-bar.reload-to-update": {
+    "message": "أعد التشغيل للتحديث"
+  },
+  "app.action-bar.show-more-running-instances": {
+    "message": "عرض المزيد من النسخ قيد التشغيل"
+  },
+  "app.action-bar.stop-instance": {
+    "message": "إيقاف النسخة"
+  },
+  "app.action-bar.update": {
+    "message": "تحديث"
+  },
+  "app.action-bar.view-active-downloads": {
+    "message": "عرض التحميلات الفعالة"
+  },
+  "app.action-bar.view-instance": {
+    "message": "عرض النسخة"
+  },
+  "app.action-bar.view-logs": {
+    "message": "عرض التسجيل"
+  },
+  "app.appearance-settings.advanced-rendering.description": {
+    "message": "يتيح العرض المتقدم لتأثيرات مثل التشويش الذي قد تسبب مشكلات في الأداء دون استخدام العرض المسرع بالأجهزة."
+  },
+  "app.appearance-settings.advanced-rendering.title": {
+    "message": "العرض المتقدم"
+  },
+  "app.appearance-settings.color-theme.description": {
+    "message": "اختر لون سمتك المفضل من أجل تطبيق TJMC Launcher."
+  },
+  "app.appearance-settings.color-theme.title": {
+    "message": "لون السمة"
+  },
+  "app.appearance-settings.default-landing-page.description": {
+    "message": "غير الصفحة التي يفتح عليها المشغل."
+  },
+  "app.appearance-settings.default-landing-page.home": {
+    "message": "صفحة الرئيسية"
+  },
+  "app.appearance-settings.default-landing-page.library": {
+    "message": "مكتبة"
+  },
+  "app.appearance-settings.default-landing-page.title": {
+    "message": "الصفحة الرئيسة الافتراضية"
+  },
+  "app.auth-servers.unreachable.body": {
+    "message": "قد تكون خوادم مصادقة ماينكرافت معطلة حاليًا. تحقق من اتصالك بالإنترنت وحاول مرة أخرى لاحقًا."
+  },
+  "app.auth-servers.unreachable.header": {
+    "message": "تعذر الوصول إلى خوادم المصادقة"
+  },
+  "app.browse.add-to-instance": {
+    "message": "أضف للنموذج"
+  },
+  "app.browse.add-to-instance-name": {
+    "message": "أضف للنموذج {instanceName}"
+  },
+  "app.browse.added": {
+    "message": "مضاف"
+  },
+  "app.browse.already-added": {
+    "message": "مضاف فعلا"
+  },
+  "app.browse.back-to-instance": {
+    "message": "العودة للنموذج"
+  },
+  "app.browse.discover-content": {
+    "message": "استكشف محتوى"
+  },
+  "app.browse.discover-servers": {
+    "message": "استكشف خوادم"
+  },
+  "app.browse.hide-added-servers": {
+    "message": "إخفاء الخوادم المضافة مسبقًا"
+  },
+  "app.browse.server.installing": {
+    "message": "جاري التثبيت"
+  },
+  "app.export-modal.description-placeholder": {
+    "message": "أدخل وصف التعديل..."
+  },
+  "app.export-modal.export-button": {
+    "message": "تصدير"
+  },
+  "app.export-modal.header": {
+    "message": "تصدير حزمة التعديل"
+  },
+  "app.export-modal.modpack-name-label": {
+    "message": "إسم حزمة التعديل"
+  },
+  "app.export-modal.modpack-name-placeholder": {
+    "message": "إسم حزمة التعديل"
+  },
+  "app.export-modal.version-number-label": {
+    "message": "رقم الإصدار"
+  },
+  "app.export-modal.version-number-placeholder": {
+    "message": "1.0.0"
+  },
+  "app.instance.confirm-delete.admonition-body": {
+    "message": "سيتم حذف جميع البيانات الخاصة لنموذجك نهائيًا، بما في ذلك عوالمك والتكوينات وكل المحتوى المثبت."
+  },
+  "app.instance.confirm-delete.admonition-header": {
+    "message": "لا يمكن التراجع عن هذا الإجراء"
+  },
+  "app.instance.confirm-delete.delete-button": {
+    "message": "حذف النموذج"
+  },
+  "app.instance.confirm-delete.header": {
+    "message": "حذف النموذج"
+  },
+  "app.instance.modpack-already-installed.body": {
+    "message": "حُزْمَة التعديل مثبته مسبقًا فعلًا في نموذج <bold>{instanceName}</bold>. هل أنت متأكد بإرادة نسخه؟"
+  },
+  "app.instance.modpack-already-installed.create": {
+    "message": "إنشاء"
+  },
+  "app.instance.modpack-already-installed.header": {
+    "message": "حُزْمَة التعديل مثبتة فعلًا"
+  },
+  "app.instance.modpack-already-installed.instance": {
+    "message": "النموذج"
+  },
+  "app.instance.mods.content-type-project": {
+    "message": "مشروع"
+  },
+  "app.instance.mods.project-was-added": {
+    "message": "تمت إضافة \"{name}\""
+  },
+  "app.instance.mods.projects-were-added": {
+    "message": "تمت إضافة {count} مشروع"
+  },
+  "app.instance.mods.share-text": {
+    "message": "تحقق من المشاريع التي أستخدمها في حزمة التعديل الخاص بي!"
+  },
+  "app.instance.mods.share-title": {
+    "message": "مشاركة محتوى حُزْمَة التعديل"
+  },
+  "app.instance.mods.successfully-uploaded": {
+    "message": "تم الرفع بنجاح"
+  },
+  "app.instance.worlds.add-server": {
+    "message": "أضف خادم"
+  },
+  "app.instance.worlds.browse-servers": {
+    "message": "تصفح الخوادم"
+  },
+  "app.instance.worlds.filter-modded": {
+    "message": "معدّل"
+  },
+  "app.instance.worlds.filter-offline": {
+    "message": "مفصول"
+  },
+  "app.instance.worlds.filter-online": {
+    "message": "يعمل"
+  },
+  "app.instance.worlds.filter-vanilla": {
+    "message": "الأصلي"
+  },
+  "app.instance.worlds.no-worlds-description": {
+    "message": "أضف خادما أو تصفح لكي تبدأ"
+  },
+  "app.instance.worlds.no-worlds-heading": {
+    "message": "لم تتم إضافة أي من الخوادم أو العوالم"
+  },
+  "app.instance.worlds.search-worlds-placeholder": {
+    "message": "ابحث بين ال{count} عوالم..."
+  },
+  "app.project.install-context.back-to-browse": {
+    "message": "العودة إلى الاستكشاف"
+  },
+  "app.project.install-context.install-content-to-instance": {
+    "message": "تثبيت المحتويات الى النموذج"
+  },
+  "app.settings.developer-mode-enabled": {
+    "message": "تم تفعيل وضع المطوّر."
+  },
+  "app.settings.downloading": {
+    "message": "جار تنزيل الإصدار {version}"
+  },
+  "app.skins.add-button": {
+    "message": "إضافة مظهر"
+  },
+  "app.skins.add-button.drag-and-drop": {
+    "message": "أسحب ثم أفلت"
+  },
+  "app.skins.delete-button": {
+    "message": "حذف المظهر"
+  },
+  "app.skins.edit-button": {
+    "message": "تعديل المظهر"
+  },
+  "app.skins.modal.add-skin-button": {
+    "message": "إضافة المظهر"
+  },
+  "app.skins.modal.add-title": {
+    "message": "إضافة المظهر"
+  },
+  "app.skins.modal.cape-section": {
+    "message": "رداء"
+  },
+  "app.skins.modal.edit-title": {
+    "message": "تعديل المظهر"
+  },
+  "app.skins.modal.make-edit-first-tooltip": {
+    "message": "عدل المظهر أولا للحفظ !"
+  },
+  "app.skins.modal.save-skin-button": {
+    "message": "حفظ المظهر"
+  },
+  "app.skins.modal.saving-tooltip": {
+    "message": "حفظ..."
+  },
+  "app.skins.modal.upload-skin-first-tooltip": {
+    "message": "أرفع المظهر أولا !"
+  },
+  "app.update-popup.body.download-complete": {
+    "message": "انتهى تنزيل تطبيق TJMC Launcherv{version}. أعد التحميل للتحديث الآن، أو تلقائيًا عند إغلاق تطبيق TJMC Launcher."
+  },
+  "app.update-popup.body.metered": {
+    "message": "تطبيق TJMC Launcherv{version} متاح الآن! وبما أنك متصل بشبكة مقيّدة، لم نقم بتنزيله تلقائيًا."
+  },
+  "app.update-popup.changelog": {
+    "message": "سجل التغيير"
+  },
+  "app.update-popup.download": {
+    "message": "تنزيل ({size})"
+  },
+  "app.update-popup.download-complete": {
+    "message": "اكتمل التنزيل"
+  },
+  "app.update-popup.title": {
+    "message": "تحديث متاح"
+  },
+  "app.update.complete-toast.text": {
+    "message": "انقر هنا لعرض سجلّ التغييرات."
+  },
+  "app.update.complete-toast.title": {
+    "message": "تم تثبيت الإصدار {version} بنجاح!"
+  },
+  "app.world.server-modal.placeholder-address": {
+    "message": "مثال (example.modrinth.gg)"
+  },
+  "app.world.server-modal.select-an-option": {
+    "message": "حدد خيارا"
+  },
+  "app.world.world-item.incompatible-version": {
+    "message": "إصدار غير مطابق ({version})"
+  },
+  "app.world.world-item.not-played-yet": {
+    "message": "لم يتم اللعب به"
+  },
+  "app.world.world-item.offline": {
+    "message": "مفصول"
+  },
+  "app.world.world-item.players-online": {
+    "message": "{count} متصل حاليا"
+  },
+  "friends.action.add-friend": {
+    "message": "إضافة صديق"
+  },
+  "friends.action.view-friend-requests": {
+    "message": "{count} {count, plural, one {طلب صداقة} other {طلبات صداقة}}"
+  },
+  "friends.add-friend.submit": {
+    "message": "إرسال طلب صداقة"
+  },
+  "friends.add-friend.title": {
+    "message": "جار إضافة صديق"
+  },
+  "friends.add-friend.username.description": {
+    "message": "قد يختلف عن اسم المستخدم الخاص بهم في ماينكرافت!"
+  },
+  "friends.add-friend.username.placeholder": {
+    "message": "أدخل اسم مستخدم Modrinth..."
+  },
+  "friends.add-friend.username.title": {
+    "message": "ما اسم مستخدم صديقك في Modrinth؟"
+  },
+  "friends.add-friends-to-share": {
+    "message": "<link>أضف أصدقاء</link> لمعرفة ما الذي يلعبونه!"
+  },
+  "friends.friend.cancel-request": {
+    "message": "إلغاء الطلب"
+  },
+  "friends.friend.remove-friend": {
+    "message": "إزالة صديق"
+  },
+  "friends.friend.request-sent": {
+    "message": "إرسال طلب الصداقة"
+  },
+  "friends.friend.view-profile": {
+    "message": "عرض الملف الشخصي"
+  },
+  "friends.heading": {
+    "message": "أصدقاء"
+  },
+  "friends.heading.active": {
+    "message": "نشط"
+  },
+  "friends.heading.offline": {
+    "message": "غير متصل"
+  },
+  "friends.heading.online": {
+    "message": "متصل"
+  },
+  "friends.heading.pending": {
+    "message": "قيد الانتظار"
+  },
+  "friends.no-friends-match": {
+    "message": "لا يوجد أصدقاء يطابقون ‎''{query}''‎"
+  },
+  "friends.search-friends-placeholder": {
+    "message": "ابحث عن الأصدقاء..."
+  },
+  "friends.section.heading": {
+    "message": "{title} - {count}"
+  },
+  "friends.sign-in-to-add-friends": {
+    "message": "<link>سجّل الدخول إلى حساب Modrinth</link> لإضافة الأصدقاء ومعرفة ما الذي يلعبونه!"
+  },
+  "instance.add-server.add-and-play": {
+    "message": "إضافة واللعب"
+  },
+  "instance.add-server.add-server": {
+    "message": "إضافة خادم"
+  },
+  "instance.add-server.resource-pack.disabled": {
+    "message": "معطَّل"
+  },
+  "instance.add-server.resource-pack.enabled": {
+    "message": "مفعَّل"
+  },
+  "instance.add-server.resource-pack.prompt": {
+    "message": "موجه الأوامر"
+  },
+  "instance.add-server.title": {
+    "message": "إضافة خادم"
+  },
+  "instance.edit-server.title": {
+    "message": "تعديل خادم"
+  },
+  "instance.files.adding-files": {
+    "message": "إضافة ملفات ({completed}\\{total})"
+  },
+  "instance.files.save-as": {
+    "message": "حفظ ك..."
+  },
+  "instance.server-modal.address": {
+    "message": "العنوان"
+  },
+  "instance.server-modal.name": {
+    "message": "الاسم"
+  },
+  "instance.server-modal.placeholder-name": {
+    "message": "خادم Minecraft"
+  },
+  "instance.server-modal.resource-pack": {
+    "message": "حزمة الموارد"
+  },
+  "instance.settings.tabs.general": {
+    "message": "عام"
+  },
+  "instance.settings.tabs.general.delete": {
+    "message": "حذف النسخة"
+  },
+  "instance.settings.tabs.general.delete.button": {
+    "message": "حذف النسخة"
+  },
+  "instance.settings.tabs.general.delete.description": {
+    "message": "يحذف النسخة نهائيًا من جهازك، بما في ذلك عوالمك، إعداداتك، وجميع المحتويات المثبّتة. كن حذرًا، فبمجرد حذف النسخة لن تكون هناك أي طريقة لاستعادتها."
+  },
+  "instance.settings.tabs.general.deleting.button": {
+    "message": "جاري الحذف..."
+  },
+  "instance.settings.tabs.general.duplicate-button": {
+    "message": "نسخ"
+  },
+  "instance.settings.tabs.general.duplicate-button.tooltip.installing": {
+    "message": "لا يمكن النسخ أثناء التثبيت."
+  },
+  "instance.settings.tabs.general.duplicate-instance": {
+    "message": "نسخة النسخة"
+  },
+  "instance.settings.tabs.general.duplicate-instance.description": {
+    "message": "ينشئ نسخة من هذا النموذج شاملا عوالمه, تعديلاتها النصيه, إلخ..."
+  },
+  "instance.settings.tabs.general.edit-icon": {
+    "message": "تعديل الأيقونة"
+  },
+  "instance.settings.tabs.general.edit-icon.remove": {
+    "message": "أزل الأيقونة"
+  },
+  "instance.settings.tabs.general.edit-icon.replace": {
+    "message": "استبدل الأيقونة"
+  },
+  "instance.settings.tabs.general.edit-icon.select": {
+    "message": "اختر الأيقونة"
+  },
+  "instance.settings.tabs.general.name": {
+    "message": "الاسم"
+  },
+  "instance.settings.tabs.hooks": {
+    "message": "إجراءات تشغيل إضافية"
+  },
+  "instance.settings.tabs.hooks.custom-hooks": {
+    "message": "إجراءات تشغيل إضافية مخصصة"
+  },
+  "instance.settings.tabs.hooks.description": {
+    "message": "إجراءات التشغيل المضافة تسمح للمستخدمين المتقدمين بإنشاء أوامر نظامية محددة قبل و عند تشغيل اللعبة."
+  },
+  "instance.settings.tabs.hooks.post-exit": {
+    "message": "ما بعد الخروج"
+  },
+  "instance.settings.tabs.hooks.post-exit.description": {
+    "message": "يتم تشغيله بعد إغلاق اللعبة."
+  },
+  "instance.settings.tabs.hooks.post-exit.enter": {
+    "message": "أدخل أمر ما بعد الخروج..."
+  },
+  "instance.settings.tabs.hooks.pre-launch": {
+    "message": "ما قبل الإطلاق"
+  },
+  "instance.settings.tabs.hooks.pre-launch.description": {
+    "message": "يتم تشغيله قبل بَدْء تشغيل النسخة."
+  },
+  "instance.settings.tabs.hooks.pre-launch.enter": {
+    "message": "أدخل أمر ما قبل الإطلاق..."
+  },
+  "instance.settings.tabs.hooks.title": {
+    "message": "خطافات تشغيل اللعبة"
+  },
+  "instance.settings.tabs.hooks.wrapper": {
+    "message": "مُغلِّف"
+  },
+  "instance.settings.tabs.hooks.wrapper.description": {
+    "message": "أمر غلاف لتشغيل ماينكرافت."
+  },
+  "instance.settings.tabs.hooks.wrapper.enter": {
+    "message": "أدخل أمر الغلاف..."
+  },
+  "instance.settings.tabs.installation": {
+    "message": "تثبيت"
+  },
+  "instance.settings.tabs.installation.loader-version": {
+    "message": "إصدار {loader}"
+  },
+  "instance.settings.tabs.java": {
+    "message": "جافا والذاكرة"
+  },
+  "instance.settings.tabs.java.environment-variables": {
+    "message": "المتغيرات البيئية"
+  },
+  "instance.settings.tabs.java.java-arguments": {
+    "message": "وسائط جافا"
+  },
+  "instance.settings.tabs.java.java-installation": {
+    "message": "تثبيت جافا"
+  },
+  "instance.settings.tabs.java.java-memory": {
+    "message": "الذاكرة المخصَّصة"
+  },
+  "instance.settings.tabs.java.java-path-placeholder": {
+    "message": "/path/to/java"
+  },
+  "instance.settings.tabs.window": {
+    "message": "النافذة"
+  },
+  "instance.settings.tabs.window.custom-window-settings": {
+    "message": "إعدادات نافذة مخصّصة"
+  },
+  "instance.settings.tabs.window.fullscreen": {
+    "message": "ملء الشاشة"
+  },
+  "instance.settings.tabs.window.fullscreen.description": {
+    "message": "جعل اللعبة تبدأ في وضع ملء الشاشة عند التشغيل (باستخدام ‎options.txt)."
+  },
+  "instance.settings.tabs.window.height": {
+    "message": "الارتفاع"
+  },
+  "instance.settings.tabs.window.height.description": {
+    "message": "ارتفاع نافذة اللعبة عند التشغيل."
+  },
+  "instance.settings.tabs.window.height.enter": {
+    "message": "أدخل الارتفاع..."
+  },
+  "instance.settings.tabs.window.width": {
+    "message": "العرض"
+  },
+  "instance.settings.tabs.window.width.description": {
+    "message": "عرض نافذة اللعبة عند التشغيل."
+  },
+  "instance.settings.tabs.window.width.enter": {
+    "message": "أدخل العرض..."
+  },
+  "instance.worlds.a_minecraft_server": {
+    "message": "خادم ماين كرافت"
+  },
+  "instance.worlds.cant_connect": {
+    "message": "لا يمكن الاتصال بالخادم"
+  },
+  "instance.worlds.copy_address": {
+    "message": "نسخ العنوان"
+  },
+  "instance.worlds.game_already_open": {
+    "message": "النسخة مفتوحة بالفعل"
+  },
+  "instance.worlds.hardcore": {
+    "message": "وضع الهاردكور"
+  },
+  "instance.worlds.incompatible_server": {
+    "message": "الخادم غير متوافق"
+  },
+  "instance.worlds.linked_server": {
+    "message": "تدار بواسطة مشروع الخادم"
+  },
+  "instance.worlds.no_contact": {
+    "message": "تعذّر الاتصال بالخادم"
+  },
+  "instance.worlds.no_server_quick_play": {
+    "message": "يمكنك الدخول مباشرة إلى الخوادم فقط على ماين كرافت Alpha 1.0.5+"
+  },
+  "instance.worlds.no_singleplayer_quick_play": {
+    "message": "يمكنك الدخول مباشرة إلى عوالم اللعب الفردي فقط على ماين كرافت ‎1.20+‎"
+  },
+  "instance.worlds.play_instance": {
+    "message": "تشغيل النسخة"
+  },
+  "instance.worlds.view_instance": {
+    "message": "عرض النسخة"
+  },
+  "instance.worlds.world_in_use": {
+    "message": "العالم قيد الاستخدام"
+  },
+  "minecraft-account.select-account": {
+    "message": "اختيار الحساب"
+  },
+  "search.filter.locked.instance": {
+    "message": "مقدَّم من النسخة"
+  },
+  "search.filter.locked.instance-game-version.title": {
+    "message": "إصدار اللعبة مقدَّم من النسخة"
+  },
+  "search.filter.locked.instance-loader.title": {
+    "message": "المحمّل مقدَّم من النسخة"
+  },
+  "search.filter.locked.instance.sync": {
+    "message": "مزامنة مع النسخة"
+  },
+  "search.filter.locked.server": {
+    "message": "يقدمها الخادم"
+  },
+  "search.filter.locked.server-environment.title": {
+    "message": "يمكن إضافة التعديلات **المحليه** فقط إلى نموذج الخادم"
+  },
+  "search.filter.locked.server-game-version.title": {
+    "message": "يتم توفير نسخة اللعبة من قبل الخادم"
+  },
+  "search.filter.locked.server-loader.title": {
+    "message": "يتم توفير المحمّل من قبل الخادم"
+  },
+  "unknown-pack-warning-modal.dont-show-again": {
+    "message": "لا تعرض هذا التحذير مجددا"
+  },
+  "app.skins.apply-button": {
+    "message": "Apply"
+  },
+  "app.skins.delete-modal.description": {
+    "message": "This will permanently delete the selected skin. This action cannot be undone."
+  },
+  "app.skins.delete-modal.title": {
+    "message": "Are you sure you want to delete this skin?"
+  },
+  "app.skins.dropped-file-error.text": {
+    "message": "Failed to read the dropped file."
+  },
+  "app.skins.dropped-file-error.title": {
+    "message": "Error processing file"
+  },
+  "app.skins.modal.arm-style-section": {
+    "message": "Arm style"
+  },
+  "app.skins.modal.arm-style-slim": {
+    "message": "Slim"
+  },
+  "app.skins.modal.arm-style-wide": {
+    "message": "Wide"
+  },
+  "app.skins.modal.replace-texture-button": {
+    "message": "Replace texture"
+  },
+  "app.skins.modal.texture-section": {
+    "message": "Texture"
+  },
+  "app.skins.offline-account.compatibility": {
+    "message": "Offline skins are applied locally with a resource pack. Compatibility is best on Minecraft 1.6–1.19.2; newer versions are supported on a best-effort basis. The skin is not uploaded to Mojang, may also replace other default-skinned players on your client, and some skin mods or server plugins may override it."
+  },
+  "app.skins.offline-account.compatibility-title": {
+    "message": "Offline skin compatibility"
+  },
+  "app.skins.preview.edit-button": {
+    "message": "Edit skin"
+  },
+  "app.skins.previewing-badge": {
+    "message": "Previewing"
+  },
+  "app.skins.rate-limit.text": {
+    "message": "You're changing your skin too frequently. Mojang's servers have temporarily blocked further requests. Please wait a moment before trying again."
+  },
+  "app.skins.rate-limit.title": {
+    "message": "Slow down!"
+  },
+  "app.skins.reorder-error.text": {
+    "message": "Your skin order could not be saved."
+  },
+  "app.skins.reorder-error.title": {
+    "message": "Failed to reorder skins"
+  },
+  "app.skins.section.saved-skins": {
+    "message": "Saved skins"
+  },
+  "app.skins.sign-in.axolotl-alt": {
+    "message": "TJMC Launcher"
+  },
+  "app.skins.sign-in.button": {
+    "message": "Sign In"
+  },
+  "app.skins.sign-in.description": {
+    "message": "Please sign into your Minecraft account to use the skin management features of TJMC Launcher."
+  },
+  "app.skins.sign-in.title": {
+    "message": "Please sign in"
+  },
+  "app.skins.third-party-account.description": {
+    "message": "Skins for this account are managed by its Yggdrasil provider. Open the provider website to change skins or capes."
+  },
+  "app.skins.third-party-account.title": {
+    "message": "Third-party skin management"
+  },
+  "app.skins.title": {
+    "message": "Skin selector"
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "app.auth-servers.unreachable.body": {
+    "message": "Minecraft serveri za autentifikaciju su možda trenutno nedostupni. Molimo vas da proverite vašu internet vezu i pokušajte ponovo kasnije."
+  },
+  "app.auth-servers.unreachable.header": {
+    "message": "Serveri za autentifikaciju su nedostupni"
+  },
+  "app.browse.add-to-instance": {
+    "message": "Dodaj na instancu"
+  },
+  "app.browse.add-to-instance-name": {
+    "message": "Dodaj na {instanceName}"
+  },
+  "app.browse.added": {
+    "message": "Dodato"
+  },
+  "app.browse.already-added": {
+    "message": "Već je dodato"
+  },
+  "app.browse.discover-content": {
+    "message": "Otkrij sadržaj"
+  },
+  "app.browse.discover-servers": {
+    "message": "Otkrij servere"
+  },
+  "app.export-modal.description-placeholder": {
+    "message": "Ukucaj opis modpacka..."
+  },
+  "app.export-modal.export-button": {
+    "message": "Izvoz"
+  },
+  "app.export-modal.header": {
+    "message": "Izvezi modpack"
+  },
+  "app.export-modal.modpack-name-label": {
+    "message": "Ime Modpacka"
+  },
+  "app.export-modal.modpack-name-placeholder": {
+    "message": "Ime modpacka"
+  },
+  "app.export-modal.version-number-label": {
+    "message": "Broj verzije"
+  },
+  "app.export-modal.version-number-placeholder": {
+    "message": "1.0.0"
+  },
+  "app.instance.confirm-delete.admonition-body": {
+    "message": "Svi podaci za tvoju instancu će biti trajno izbrisani, uključujući tvoje svetove, konfiguracije, i sav instaliran sadržaj."
+  },
+  "app.instance.confirm-delete.admonition-header": {
+    "message": "Ova akcija ne može biti poništena"
+  },
+  "app.instance.confirm-delete.delete-button": {
+    "message": "Izbriši instancu"
+  },
+  "app.instance.confirm-delete.header": {
+    "message": "Izbriši instancu"
+  },
+  "app.instance.modpack-already-installed.body": {
+    "message": "Ovaj modpack je već instaliran u <bold>{instanceName}</bold> instancu. Da li ste sigurni da želite da je duplirate?"
+  },
+  "app.instance.modpack-already-installed.create": {
+    "message": "Napravi"
+  },
+  "app.instance.modpack-already-installed.header": {
+    "message": "Modpack je već instaliran"
+  },
+  "app.instance.modpack-already-installed.instance": {
+    "message": "Instanca"
+  },
+  "app.instance.mods.content-type-project": {
+    "message": "projekat"
+  },
+  "app.instance.mods.project-was-added": {
+    "message": "\"{name}\" je dodato"
+  },
+  "app.instance.mods.projects-were-added": {
+    "message": "{count} projekata je dodato"
+  },
+  "app.instance.mods.share-text": {
+    "message": "Pogledaj ove projekte koje ja koristim u svom modpacku!"
+  },
+  "app.instance.mods.share-title": {
+    "message": "Deljenje sadržaja modpacka"
+  },
+  "app.instance.mods.successfully-uploaded": {
+    "message": "Uspešno otpremljeno"
+  },
+  "app.instance.worlds.add-server": {
+    "message": "Dodaj server"
+  },
+  "app.instance.worlds.browse-servers": {
+    "message": "Pretraži servere"
+  },
+  "app.instance.worlds.filter-modded": {
+    "message": "Modifikovano"
+  },
+  "app.instance.worlds.filter-offline": {
+    "message": "Oflajn"
+  },
+  "app.instance.worlds.filter-online": {
+    "message": "Onlajn"
+  },
+  "app.instance.worlds.filter-vanilla": {
+    "message": "Vanila"
+  },
+  "app.instance.worlds.no-worlds-description": {
+    "message": "Dodaj server ili pretraži da bi započeo"
+  },
+  "app.instance.worlds.no-worlds-heading": {
+    "message": "Nema dodatih servera niti svetova"
+  },
+  "app.instance.worlds.search-worlds-placeholder": {
+    "message": "Pretraži {count} svetova..."
+  },
+  "friends.friend.cancel-request": {
+    "message": "Otkaži zahtev"
+  },
+  "friends.friend.remove-friend": {
+    "message": "Ukloni prijatelja"
+  },
+  "friends.friend.request-sent": {
+    "message": "Zahtev za prijateljstvo poslat"
+  },
+  "friends.friend.view-profile": {
+    "message": "Pogledaj profil"
+  },
+  "friends.heading": {
+    "message": "Prijatelji"
+  },
+  "instance.add-server.title": {
+    "message": "Dodaj server"
+  },
+  "instance.edit-server.title": {
+    "message": "Izmeni server"
+  },
+  "instance.server-modal.placeholder-name": {
+    "message": "Minecraft Server"
+  },
+  "instance.settings.tabs.general": {
+    "message": "Generalno"
+  },
+  "instance.settings.tabs.general.deleting.button": {
+    "message": "Brisanje..."
+  },
+  "instance.settings.tabs.general.name": {
+    "message": "Ime"
+  },
+  "app.skins.add-button": {
+    "message": "Add skin"
+  },
+  "app.skins.add-button.drag-and-drop": {
+    "message": "Drag and drop"
+  },
+  "app.skins.apply-button": {
+    "message": "Apply"
+  },
+  "app.skins.delete-button": {
+    "message": "Delete skin"
+  },
+  "app.skins.delete-modal.description": {
+    "message": "This will permanently delete the selected skin. This action cannot be undone."
+  },
+  "app.skins.delete-modal.title": {
+    "message": "Are you sure you want to delete this skin?"
+  },
+  "app.skins.dropped-file-error.text": {
+    "message": "Failed to read the dropped file."
+  },
+  "app.skins.dropped-file-error.title": {
+    "message": "Error processing file"
+  },
+  "app.skins.edit-button": {
+    "message": "Edit skin"
+  },
+  "app.skins.modal.add-skin-button": {
+    "message": "Add skin"
+  },
+  "app.skins.modal.add-title": {
+    "message": "Adding a skin"
+  },
+  "app.skins.modal.arm-style-section": {
+    "message": "Arm style"
+  },
+  "app.skins.modal.arm-style-slim": {
+    "message": "Slim"
+  },
+  "app.skins.modal.arm-style-wide": {
+    "message": "Wide"
+  },
+  "app.skins.modal.cape-section": {
+    "message": "Cape"
+  },
+  "app.skins.modal.edit-title": {
+    "message": "Editing skin"
+  },
+  "app.skins.modal.make-edit-first-tooltip": {
+    "message": "Make an edit to the skin first!"
+  },
+  "app.skins.modal.replace-texture-button": {
+    "message": "Replace texture"
+  },
+  "app.skins.modal.save-skin-button": {
+    "message": "Save skin"
+  },
+  "app.skins.modal.saving-tooltip": {
+    "message": "Saving..."
+  },
+  "app.skins.modal.texture-section": {
+    "message": "Texture"
+  },
+  "app.skins.modal.upload-skin-first-tooltip": {
+    "message": "Upload a skin first!"
+  },
+  "app.skins.offline-account.compatibility": {
+    "message": "Offline skins are applied locally with a resource pack. Compatibility is best on Minecraft 1.6–1.19.2; newer versions are supported on a best-effort basis. The skin is not uploaded to Mojang, may also replace other default-skinned players on your client, and some skin mods or server plugins may override it."
+  },
+  "app.skins.offline-account.compatibility-title": {
+    "message": "Offline skin compatibility"
+  },
+  "app.skins.preview.edit-button": {
+    "message": "Edit skin"
+  },
+  "app.skins.previewing-badge": {
+    "message": "Previewing"
+  },
+  "app.skins.rate-limit.text": {
+    "message": "You're changing your skin too frequently. Mojang's servers have temporarily blocked further requests. Please wait a moment before trying again."
+  },
+  "app.skins.rate-limit.title": {
+    "message": "Slow down!"
+  },
+  "app.skins.reorder-error.text": {
+    "message": "Your skin order could not be saved."
+  },
+  "app.skins.reorder-error.title": {
+    "message": "Failed to reorder skins"
+  },
+  "app.skins.section.saved-skins": {
+    "message": "Saved skins"
+  },
+  "app.skins.sign-in.axolotl-alt": {
+    "message": "TJMC Launcher"
+  },
+  "app.skins.sign-in.button": {
+    "message": "Sign In"
+  },
+  "app.skins.sign-in.description": {
+    "message": "Please sign into your Minecraft account to use the skin management features of TJMC Launcher."
+  },
+  "app.skins.sign-in.title": {
+    "message": "Please sign in"
+  },
+  "app.skins.third-party-account.description": {
+    "message": "Skins for this account are managed by its Yggdrasil provider. Open the provider website to change skins or capes."
+  },
+  "app.skins.third-party-account.title": {
+    "message": "Third-party skin management"
+  },
+  "app.skins.title": {
+    "message": "Skin selector"
+  }
+}
