@@ -37,7 +37,7 @@
 			>
 				<slot name="nametag-badge" />
 			</div>
-			<div v-if="nametag" class="px-3 py-1 rounded-md font-minecraft text-gray nametag-bg">
+			<div v-if="nametag" class="nametag-text px-3 py-1 rounded-md nametag-bg">
 				{{ nametagText }}
 			</div>
 		</div>
@@ -417,5 +417,11 @@ defineExpose({
 	box-shadow:
 		inset -0.5px -0.5px 0px rgba(0, 0, 0, 0.25),
 		inset 0.5px 0.5px 0px rgba(255, 255, 255, 0.05);
+}
+
+.nametag-text {
+	color: #fff;
+	font-family: 'SimHei', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+	font-weight: 700;
 }
 </style>

@@ -214,53 +214,62 @@ function main() {
 		getComputedStyle(document.documentElement).getPropertyValue('--color-brand').trim() || '#4444ff'
 
 	const waterMaterial = createWaterMaterial()
-	waterMaterial.uniforms.color.value = new THREE.Color(accentColor).multiplyScalar(
-		isDarkMode() ? 0.6 : 2.4,
-	)
-	// .multiplyScalar(0.6)
-	// .multiplyScalar(2.4)
+	waterMaterial.uniforms.color.value = new THREE.Color(accentColor)
 
 	scene.add(createWater(waterMaterial, new THREE.Vector3(0, -6.5, 4)))
 	scene.add(createWater(waterMaterial, new THREE.Vector3(2, -8, -10)))
 	scene.add(createWater(waterMaterial, new THREE.Vector3(16, -8, -26)))
 
 	async function load() {
-		const axlGLTF = await loadGLTF('/models/axolotl.gltf')
+		const amethystGLTF = await loadGLTF('/models/amethyst/amethyst.gltf')
+		const amethystModel = amethystGLTF.scene
 
-		const axlModel = axlGLTF.scene
-		axlModel.scale.multiplyScalar(5)
-		axlModel.rotateY(Math.PI / 2)
-		axlModel.position.add(new THREE.Vector3(0, -2.5, 0))
-		scene.add(axlModel)
+		amethystModel.traverse((object) => {
+			if (!(object instanceof THREE.Mesh)) return
 
-		const mixer = new THREE.AnimationMixer(axlModel)
-		const axlSwimAnim = axlGLTF.animations.filter((a) => a.name === 'swim')[0]
-		if (!axlSwimAnim) return console.error('Missing animation swim')
-		mixer.clipAction(axlSwimAnim).play()
+			const materials = Array.isArray(object.material) ? object.material : [object.material]
+			for (const material of materials) {
+				material.transparent = false
+				material.opacity = 1
+				material.alphaTest = 0
+				material.depthWrite = true
+				material.side = THREE.DoubleSide
 
-		// // Axl Label
-		// const axlLabelGLTF = await loadGLTF('/models/axl_label.glb')
-		// const axlLabel = axlLabelGLTF.scene
-		// axlLabel.scale.multiplyScalar(8)
-		// axlLabel.rotateY(-Math.PI / 2)
-		// axlLabel.position.set(0, 5.2, 0)
-		// scene.add(axlLabel)
+				if (material instanceof THREE.MeshStandardMaterial) {
+					material.emissive.set(0xffffff)
+					material.emissiveMap = material.map
+					material.emissiveIntensity = 2
+				}
 
-		const originAxlModelPosition = axlModel.position.clone()
+				material.needsUpdate = true
+			}
+		})
+
+		const bounds = new THREE.Box3().setFromObject(amethystModel)
+		const size = bounds.getSize(new THREE.Vector3())
+		const center = bounds.getCenter(new THREE.Vector3())
+		const modelScale = 7.5 / Math.max(size.x, size.y, size.z)
+		amethystModel.scale.setScalar(modelScale)
+		amethystModel.position.copy(center).multiplyScalar(-modelScale)
+
+		const modelPivot = new THREE.Group()
+		const pivotOriginY = -0.4
+		modelPivot.position.y = pivotOriginY
+		modelPivot.add(amethystModel)
+		scene.add(modelPivot)
+
 		return function (deltaTime: number, elapsedTime: number) {
-			axlModel.position.set(
-				originAxlModelPosition.x,
-				originAxlModelPosition.y + Math.sin(elapsedTime),
-				originAxlModelPosition.z,
-			)
-			axlModel.rotation.y = Math.sin(elapsedTime * 0.3) * 0.2 + (Math.PI * 100) / 180
-			mixer.update(deltaTime)
+			modelPivot.position.y = pivotOriginY + Math.sin(elapsedTime * 0.8) * 0.35
+			modelPivot.rotation.x = elapsedTime * 0.08
+			modelPivot.rotation.y = elapsedTime * 0.16
 		}
 	}
 	let updateGLTF = (_deltaTime: number, _elapsedTime: number) => {}
-	load().then((updateFn) => {
-		if (updateFn) updateGLTF = updateFn
-	})
+	load()
+		.then((updateFn) => {
+			if (updateFn) updateGLTF = updateFn
+		})
+		.catch((error) => console.error('Failed to load Amethyst model', error))
 
 	const circleMaterial = createCircleMaterial()
 	circleMaterial.uniforms.color.value = new THREE.Color(accentColor).multiplyScalar(

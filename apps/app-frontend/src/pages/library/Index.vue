@@ -86,8 +86,8 @@ onUnmounted(() => {
 
 	.icon {
 		svg {
-			width: 10rem;
-			height: 10rem;
+			width: min(20rem, 80vw);
+			height: auto;
 		}
 	}
 }

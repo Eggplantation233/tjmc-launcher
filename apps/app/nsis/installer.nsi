@@ -81,6 +81,9 @@ ${StrLoc}
 !define AXL_BRAND F472B6
 !define AXL_SUCCESS 1BD96A
 !define AXL_ERROR FF496E
+!define AXL_UNINSTALL_BACKGROUND FFFFFF
+!define AXL_UNINSTALL_TEXT 000000
+!define AXL_UNINSTALL_TEXT_MUTED 505050
 
 !define MUI_BGCOLOR ${AXL_BACKGROUND}
 !define MUI_TEXTCOLOR ${AXL_TEXT}
@@ -91,7 +94,7 @@ ${StrLoc}
 !define MUI_FINISHPAGE_TEXT "$(axlFinishText)"
 !define MUI_ABORTWARNING
 !define MUI_CUSTOMFUNCTION_GUIINIT ApplyAxolotlTheme
-!define MUI_CUSTOMFUNCTION_UNGUIINIT un.ApplyAxolotlTheme
+!define MUI_CUSTOMFUNCTION_UNGUIINIT un.ApplyDefaultTheme
 
 Var PassiveMode
 Var UpdateMode
@@ -770,11 +773,10 @@ Function un.ConfirmShow ; Add add a `Delete app data` check box
   Pop $DeleteAppDataCheckbox
   SendMessage $HWNDPARENT ${WM_GETFONT} 0 0 $1
   SendMessage $DeleteAppDataCheckbox ${WM_SETFONT} $1 1
-  SetCtlColors $HWNDPARENT ${AXL_TEXT} ${AXL_BACKGROUND}
+  SetCtlColors $HWNDPARENT ${AXL_UNINSTALL_TEXT} ${AXL_UNINSTALL_BACKGROUND}
   FindWindow $1 "#32770" "" $HWNDPARENT
-  SetCtlColors $1 ${AXL_TEXT} ${AXL_BACKGROUND}
-  SetCtlColors $DeleteAppDataCheckbox ${AXL_TEXT} ${AXL_BACKGROUND}
-  System::Call 'uxtheme::SetWindowTheme(p $DeleteAppDataCheckbox, w "DarkMode_Explorer", w "")'
+  SetCtlColors $1 ${AXL_UNINSTALL_TEXT} ${AXL_UNINSTALL_BACKGROUND}
+  SetCtlColors $DeleteAppDataCheckbox ${AXL_UNINSTALL_TEXT} ${AXL_UNINSTALL_BACKGROUND}
 FunctionEnd
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE un.ConfirmLeave
 Function un.ConfirmLeave
@@ -792,37 +794,25 @@ FunctionEnd
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW un.FinishShow
 !insertmacro MUI_UNPAGE_FINISH
 
-Function un.ApplyAxolotlTheme
+Function un.ApplyDefaultTheme
   CreateFont $InstallerBodyFont "Segoe UI" 9 400
   CreateFont $InstallerTitleFont "Segoe UI" 16 700
   CreateFont $InstallerSmallFont "Segoe UI" 8 400
-  System::Call 'dwmapi::DwmSetWindowAttribute(p $HWNDPARENT, i 20, *i 1, i 4)i.r0'
-  ${If} $0 <> 0
-    System::Call 'dwmapi::DwmSetWindowAttribute(p $HWNDPARENT, i 19, *i 1, i 4)'
-  ${EndIf}
-  SetCtlColors $HWNDPARENT ${AXL_TEXT} ${AXL_BACKGROUND}
-  GetDlgItem $0 $HWNDPARENT 1
-  !insertmacro AxlStyleControl $0 ${AXL_TEXT} ${AXL_CONTROL}
-  GetDlgItem $0 $HWNDPARENT 2
-  !insertmacro AxlStyleControl $0 ${AXL_TEXT} ${AXL_CONTROL}
-  GetDlgItem $0 $HWNDPARENT 3
-  !insertmacro AxlStyleControl $0 ${AXL_TEXT} ${AXL_CONTROL}
+  SetCtlColors $HWNDPARENT ${AXL_UNINSTALL_TEXT} ${AXL_UNINSTALL_BACKGROUND}
 FunctionEnd
 
 Function un.StyleCurrentPage
   FindWindow $0 "#32770" "" $HWNDPARENT
-  SetCtlColors $0 ${AXL_TEXT} ${AXL_BACKGROUND}
+  SetCtlColors $0 ${AXL_UNINSTALL_TEXT} ${AXL_UNINSTALL_BACKGROUND}
   SendMessage $0 ${WM_SETFONT} $InstallerBodyFont 1
   GetDlgItem $1 $0 1200
-  SetCtlColors $1 ${AXL_TEXT} ${AXL_BACKGROUND}
+  SetCtlColors $1 ${AXL_UNINSTALL_TEXT} ${AXL_UNINSTALL_BACKGROUND}
   SendMessage $1 ${WM_SETFONT} $InstallerTitleFont 1
   GetDlgItem $1 $0 1201
-  SetCtlColors $1 ${AXL_TEXT_MUTED} ${AXL_BACKGROUND}
+  SetCtlColors $1 ${AXL_UNINSTALL_TEXT_MUTED} ${AXL_UNINSTALL_BACKGROUND}
   SendMessage $1 ${WM_SETFONT} $InstallerBodyFont 1
   GetDlgItem $1 $0 1004
-  !insertmacro AxlStyleControl $1 ${AXL_TEXT_MUTED} ${AXL_SURFACE}
-  GetDlgItem $1 $0 1027
-  !insertmacro AxlStyleControl $1 ${AXL_TEXT} ${AXL_CONTROL}
+  SetCtlColors $1 ${AXL_UNINSTALL_TEXT} ${AXL_UNINSTALL_BACKGROUND}
 FunctionEnd
 
 Function un.InstFilesShow

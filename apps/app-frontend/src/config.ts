@@ -4,13 +4,13 @@ export const AxolotlBrandConfig = Object.freeze({
 	productName: 'TJMC Launcher',
 	shortProductName: 'TJMC',
 	societyName: 'TJMC',
-	website: 'https://www.sitmc.club/',
-	repositoryUrl: 'https://github.com/SIT-Minecraft-Axolotl-Club/Axolotl',
+	website: 'https://github.com/Eggplantation233/tjmc-launcher',
+	repositoryUrl: 'https://github.com/Eggplantation233/tjmc-launcher',
 	// The AGPL LICENSE text only exists upstream; the society fork carries COPYING.md
 	// and the third-party attributions that the About page links to as well.
 	upstreamRepositoryUrl: 'https://github.com/Mystic-Stars/Axolotl',
-	supportUrl: 'https://qm.qq.com/q/YTb3tqvyYE',
-	qqGroupNumber: '623697015',
+	supportUrl: 'https://github.com/Eggplantation233/tjmc-launcher',
+	qqGroupNumber: '750669570',
 	qqChannelUrl: '',
 	sponsorUrl: '',
 	surveyUrl: '',

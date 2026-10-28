@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import searchingVisual from '@/assets/axo-searching.svg?url'
-import teachingVisual from '@/assets/axo-teaching.svg?url'
+import searchingVisual from '@/assets/amethyst-search.svg?url'
+import teachingVisual from '@/assets/amethyst-teach.svg?url'
 
 defineProps<{
 	alt: string
@@ -16,7 +16,7 @@ const mascotVisual = mascotVisuals[Math.floor(Math.random() * mascotVisuals.leng
 
 <style scoped lang="scss">
 .onboarding-mascot {
-	width: clamp(6rem, 11vw, 9rem);
+	width: clamp(10rem, 16vw, 14rem);
 	height: auto;
 	object-fit: contain;
 }

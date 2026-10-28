@@ -153,7 +153,7 @@ const messages = defineMessages({
 	},
 	productDescription: {
 		id: 'app.settings.about.description',
-		defaultMessage: 'Your last launcher.',
+		defaultMessage: 'TJMC专用版本分发管理系统',
 	},
 	version: {
 		id: 'app.settings.about.version',
