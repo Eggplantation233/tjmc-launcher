@@ -24,7 +24,7 @@ const MAPS: SocietyMap[] = [
 	{
 		id: 'campus',
 		label: messages.campus.id,
-		url: 'https://www.tongji-mc.cn/map',
+		url: 'https://www.tongji-mc.cn/map/',
 	},
 ]
 
@@ -42,8 +42,15 @@ function storedMapId(): SocietyMapId {
 
 const selectedId = ref<SocietyMapId>(storedMapId())
 const selectedMap = computed(() => MAPS.find((map) => map.id === selectedId.value) ?? MAPS[0])
+const mapCacheKey = ref(Date.now())
+const selectedMapSrc = computed(() => {
+	const url = new URL(selectedMap.value.url)
+	url.searchParams.set('_tjmc_map', mapCacheKey.value.toString())
+	return url.toString()
+})
 
 watch(selectedId, (id) => {
+	mapCacheKey.value = Date.now()
 	try {
 		localStorage.setItem(STORAGE_KEY, id)
 	} catch {
@@ -98,8 +105,8 @@ watch(selectedId, (id) => {
 			itself fullscreen, which used to leave the rest of the launcher dead.
 		-->
 		<iframe
-			:key="selectedMap.id"
-			:src="selectedMap.url"
+			:key="`${selectedMap.id}-${mapCacheKey}`"
+			:src="selectedMapSrc"
 			:title="selectedMap.url"
 			class="min-h-96 w-full flex-1 rounded-[var(--radius-lg)] border border-solid border-divider bg-surface-4"
 			sandbox="allow-scripts allow-same-origin allow-forms allow-popups"

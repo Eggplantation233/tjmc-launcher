@@ -109,7 +109,7 @@
 				"style-src": "'unsafe-inline' 'self'",
 				"script-src": "'self' 'unsafe-eval' 'wasm-unsafe-eval'",
 				"worker-src": "'self' blob:",
-				"frame-src": "https://www.youtube.com https://www.youtube-nocookie.com https://discord.com 'self' http://axolotl-skin.localhost axolotl-skin://localhost https://map.tongji-mc.cn",
+				"frame-src": "https://www.youtube.com https://www.youtube-nocookie.com https://discord.com 'self' http://axolotl-skin.localhost axolotl-skin://localhost https://www.tongji-mc.cn https://map.tongji-mc.cn",
 				"media-src": "'self' data: https://*.githubusercontent.com"
 			},
 			"csp": {
@@ -120,7 +120,7 @@
 				"style-src": "'unsafe-inline' 'self'",
 				"script-src": "'self' 'unsafe-eval' 'wasm-unsafe-eval'",
 				"worker-src": "'self' blob:",
-				"frame-src": "https://www.youtube.com https://www.youtube-nocookie.com https://discord.com 'self' axolotl-skin://localhost http://axolotl-skin.localhost https://map.tongji-mc.cn",
+				"frame-src": "https://www.youtube.com https://www.youtube-nocookie.com https://discord.com 'self' axolotl-skin://localhost http://axolotl-skin.localhost https://www.tongji-mc.cn https://map.tongji-mc.cn",
 				"media-src": "'self' data: https://*.githubusercontent.com"
 			}
 		}

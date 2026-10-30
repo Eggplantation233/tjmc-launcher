@@ -108,6 +108,15 @@ export function isAnnouncementActive(item: RemoteAnnouncement, now = Date.now())
 	return Date.parse(item.starts_at) <= now && (!item.ends_at || Date.parse(item.ends_at) > now)
 }
 
+export function activeAnnouncements(
+	items: readonly RemoteAnnouncement[],
+	now = Date.now(),
+): RemoteAnnouncement[] {
+	return items
+		.filter((entry) => isAnnouncementActive(entry, now))
+		.sort((first, second) => Date.parse(second.published_at) - Date.parse(first.published_at))
+}
+
 export function announcementKey(item: RemoteAnnouncement) {
 	return item.id + ':' + item.published_at
 }

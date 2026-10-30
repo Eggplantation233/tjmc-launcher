@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BellRingIcon, ExternalIcon } from '@modrinth/assets'
+import { BellRingIcon, ChevronLeftIcon, ChevronRightIcon, ExternalIcon } from '@modrinth/assets'
 import { ButtonStyled, commonMessages, defineMessages, NewModal, useVIntl } from '@modrinth/ui'
 import { renderString } from '@modrinth/utils'
 import { openUrl } from '@tauri-apps/plugin-opener'
@@ -12,7 +12,17 @@ import { safeAnnouncementUrl } from '@/helpers/remote-announcements'
 const props = defineProps<{ dashboardSize?: HomeWidgetSize | null }>()
 
 const { formatMessage, locale } = useVIntl()
-const { announcement, loading, refresh } = useLatestAnnouncement()
+const {
+	announcement,
+	announcements,
+	currentIndex,
+	canGoPrevious,
+	canGoNext,
+	previous,
+	next,
+	loading,
+	refresh,
+} = useLatestAnnouncement()
 const modal = ref<InstanceType<typeof NewModal>>()
 
 const messages = defineMessages({
@@ -23,6 +33,12 @@ const messages = defineMessages({
 	published: { id: 'app.home.announcement.published', defaultMessage: 'Published {date}' },
 	important: { id: 'app.home.announcement.priority-high', defaultMessage: 'Important' },
 	urgent: { id: 'app.home.announcement.priority-critical', defaultMessage: 'Urgent' },
+	previous: { id: 'app.home.announcement.previous', defaultMessage: 'Previous announcement' },
+	next: { id: 'app.home.announcement.next', defaultMessage: 'Next announcement' },
+	position: {
+		id: 'app.home.announcement.position',
+		defaultMessage: 'Announcement {current} of {total}',
+	},
 })
 
 const summaryClass = computed(() =>
@@ -75,15 +91,50 @@ onMounted(() => {
 	<section class="flex h-full min-h-0 min-w-0 flex-col gap-2 overflow-hidden p-2">
 		<header class="flex h-8 min-w-0 flex-none items-center gap-2">
 			<BellRingIcon class="size-5 shrink-0 text-brand" aria-hidden="true" />
-			<h2 class="m-0 min-w-0 truncate text-[1rem] font-bold text-contrast">
+			<h2 class="m-0 min-w-0 flex-1 truncate text-[1rem] font-bold text-contrast">
 				{{ formatMessage(messages.title) }}
 			</h2>
 			<span
 				v-if="priority"
-				class="ml-auto shrink-0 rounded-full bg-brand-highlight px-2 py-0.5 text-xs font-semibold text-brand"
+				class="shrink-0 rounded-full bg-brand-highlight px-2 py-0.5 text-xs font-semibold text-brand"
 			>
 				{{ priority }}
 			</span>
+			<div
+				v-if="announcements.length > 1"
+				class="ml-auto flex shrink-0 items-center gap-0.5"
+				role="group"
+				:aria-label="
+					formatMessage(messages.position, {
+						current: currentIndex + 1,
+						total: announcements.length,
+					})
+				"
+			>
+				<ButtonStyled circular size="small" type="transparent">
+					<button
+						type="button"
+						:aria-label="formatMessage(messages.previous)"
+						:disabled="!canGoPrevious"
+						@click="previous"
+					>
+						<ChevronLeftIcon />
+					</button>
+				</ButtonStyled>
+				<span class="min-w-7 text-center text-xs tabular-nums text-secondary" aria-live="polite">
+					{{ currentIndex + 1 }}/{{ announcements.length }}
+				</span>
+				<ButtonStyled circular size="small" type="transparent">
+					<button
+						type="button"
+						:aria-label="formatMessage(messages.next)"
+						:disabled="!canGoNext"
+						@click="next"
+					>
+						<ChevronRightIcon />
+					</button>
+				</ButtonStyled>
+			</div>
 		</header>
 
 		<div

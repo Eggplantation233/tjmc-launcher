@@ -1081,6 +1081,14 @@ impl Credentials {
     }
 }
 
+/// Reads the active account's live administrator level from the skin site's
+/// OpenID Connect user information response.
+pub async fn fetch_tjmc_permission(
+    access_token: &str,
+) -> crate::Result<Option<i32>> {
+    oidc::fetch_user_permission(access_token).await
+}
+
 impl Serialize for Credentials {
     fn serialize<S: Serializer>(
         &self,

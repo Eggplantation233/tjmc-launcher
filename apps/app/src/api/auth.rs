@@ -32,6 +32,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             get_default_user,
             set_default_user,
             get_users,
+            get_tjmc_permission,
         ])
         .build()
 }
@@ -519,6 +520,11 @@ pub async fn get_users(
     offline_mode: bool,
 ) -> Result<Vec<minecraft_auth::MinecraftUser>> {
     Ok(minecraft_auth::users(offline_mode).await?)
+}
+
+#[tauri::command]
+pub async fn get_tjmc_permission() -> Result<Option<i32>> {
+    Ok(theseus::tjmc_permission::current_tjmc_permission().await?)
 }
 
 #[cfg(test)]

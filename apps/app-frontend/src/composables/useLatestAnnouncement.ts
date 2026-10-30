@@ -1,11 +1,11 @@
 import { getVersion } from '@tauri-apps/api/app'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import { TjmcConfig } from '@/config'
 import {
+	activeAnnouncements,
 	announcementItems,
 	fetchAnnouncementPayload,
-	isAnnouncementActive,
 	parseAnnouncements,
 	type RemoteAnnouncement,
 } from '@/helpers/remote-announcements'
@@ -95,14 +95,28 @@ async function load(): Promise<RemoteAnnouncement[] | null> {
 }
 
 export function useLatestAnnouncement() {
-	const announcement = ref<RemoteAnnouncement | null>(null)
+	const announcements = ref<RemoteAnnouncement[]>([])
+	const currentIndex = ref(0)
 	const loading = ref(true)
+	const announcement = computed(() => announcements.value[currentIndex.value] ?? null)
+	const canGoPrevious = computed(() => currentIndex.value > 0)
+	const canGoNext = computed(() => currentIndex.value + 1 < announcements.value.length)
 
 	function apply(items: RemoteAnnouncement[] | null) {
-		const active = (items ?? [])
-			.filter((entry) => isAnnouncementActive(entry))
-			.sort((first, second) => Date.parse(second.published_at) - Date.parse(first.published_at))
-		announcement.value = active[0] ?? null
+		const previousId = announcement.value?.id
+		announcements.value = activeAnnouncements(items ?? [])
+		const previousIndex = previousId
+			? announcements.value.findIndex((entry) => entry.id === previousId)
+			: -1
+		currentIndex.value = previousIndex >= 0 ? previousIndex : 0
+	}
+
+	function previous() {
+		if (canGoPrevious.value) currentIndex.value -= 1
+	}
+
+	function next() {
+		if (canGoNext.value) currentIndex.value += 1
 	}
 
 	async function refresh() {
@@ -114,5 +128,15 @@ export function useLatestAnnouncement() {
 		}
 	}
 
-	return { announcement, loading, refresh }
+	return {
+		announcement,
+		announcements,
+		currentIndex,
+		canGoPrevious,
+		canGoNext,
+		previous,
+		next,
+		loading,
+		refresh,
+	}
 }

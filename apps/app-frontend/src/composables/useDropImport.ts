@@ -104,6 +104,8 @@ export interface DropImportOptions {
 	contentInstall: ContentInstallContext
 	/** File drop handler from providers */
 	fileDrop: (paths: string[]) => void
+	/** Whether drag-and-drop imports are available to this account */
+	canUseDropImport: () => boolean
 	/** Whether currently on skins page */
 	onSkinsPage: ComputedRef<boolean>
 	/** Whether currently on schematic workshop page */
@@ -147,6 +149,7 @@ export function useDropImport(options: DropImportOptions) {
 		installModpackFromPath,
 		contentInstall,
 		fileDrop,
+		canUseDropImport,
 		onSkinsPage,
 		onSchematicWorkshopPage,
 		onSettingsPage,
@@ -1207,9 +1210,11 @@ export function useDropImport(options: DropImportOptions) {
 	/**
 	 * Whether a classification describes something the society server did not
 	 * publish: a modpack archive or another launcher's instance folder. Both
-	 * would add a local instance, which this launcher must not offer.
+	 * would add a local instance. Skin site administrators may use them; the
+	 * global drag gate keeps every other account from reaching this point.
 	 */
 	function isUnmanagedDrop(itemType: string | undefined) {
+		if (canUseDropImport()) return false
 		return itemType === 'modpack' || itemType === 'launcher' || itemType === 'hmcl_launcher'
 	}
 
@@ -2358,6 +2363,7 @@ export function useDropImport(options: DropImportOptions) {
 	const { isDragging, isProcessing, finishBatch } = useGlobalDrop(
 		{
 			classifyFile: classifyDropPath,
+			enabled: canUseDropImport,
 			onClassifyStart: (fileName) => {
 				if (onSkinsPage.value) return
 				if (onSchematicWorkshopPage.value && isSchematicFile(fileName)) return

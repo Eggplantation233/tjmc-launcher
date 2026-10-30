@@ -51,6 +51,9 @@ export interface UseGlobalDropOptions {
 	 */
 	classifyFile: (path: string) => Promise<ClassificationResult>
 
+	/** Gates both drag feedback and filesystem classification. */
+	enabled?: () => boolean
+
 	/** Called when classification begins (before the loading bar). Receives the file name. */
 	onClassifyStart?: (fileName: string) => void
 
@@ -113,6 +116,8 @@ export function useGlobalDrop(
 	}
 
 	async function handleNativeDrop(event: NativeFileDropEvent) {
+		if (options.enabled && !options.enabled()) return
+
 		if (event.type === 'enter' || event.type === 'over') {
 			isDragging.value = true
 			return
@@ -151,12 +156,12 @@ export function useGlobalDrop(
 		}
 
 		isProcessing.value = true
-		droppedFileName.value = paths[0].split(/[/\\]/).pop() ?? 'file'
-		options.onClassifyStart?.(droppedFileName.value)
-
+		const fileName = paths[0].split(/[/\\]/).pop() || 'file'
+		droppedFileName.value = fileName
 		const loadToken = loadingState?.begin()
 
 		try {
+			options.onClassifyStart?.(fileName)
 			const raw = await options.classifyFile(paths[0])
 			debug('classifyFile raw result', {
 				item_type: raw.item_type,

@@ -135,6 +135,7 @@ import {
 import { SHORTCUT_ACTIONS, type ShortcutAction } from '@/helpers/shortcut-actions'
 import { resolveAllBindings } from '@/helpers/shortcut-bindings'
 import { get_opening_command, initialize_state, set_discord_activity } from '@/helpers/state'
+import { getTjmcPermission, isTjmcAdminPermission } from '@/helpers/tjmc-permission'
 import {
 	areUpdatesEnabled,
 	backupAppDbForUpdate,
@@ -184,6 +185,7 @@ const { hasModal } = useModalStack()
 const router = useRouter()
 const route = useRoute()
 const onSchematicWorkshopPage = computed(() => route.path === '/lab/schematic-preview')
+const onSkinsPage = computed(() => route.path.startsWith('/skins'))
 const onSettingsPage = computed(() => route.path.startsWith('/settings'))
 const isSchematicFile = (path: string) => /\.(litematic|schematic|schem)$/i.test(path)
 const APP_LEFT_NAV_WIDTH = '4rem'
@@ -382,6 +384,8 @@ const privacyConsentPending = ref(false)
  * instead of opening the gate.
  */
 const minecraftAccounts = ref<unknown[]>([])
+const tjmcPermission = ref<number | null>(null)
+const canUseDropImport = computed(() => isTjmcAdminPermission(tjmcPermission.value))
 const sessionExpired = ref(false)
 const communityAnnouncementModal = ref()
 const surveyModal = ref()
@@ -1924,6 +1928,8 @@ const dropImport = useDropImport({
 	installModpackFromPath,
 	contentInstall,
 	fileDrop,
+	canUseDropImport: () => canUseDropImport.value,
+	onSkinsPage,
 	onSchematicWorkshopPage,
 	onSettingsPage,
 	isSchematicFile,
@@ -2147,6 +2153,16 @@ async function refreshMinecraftAccounts() {
 	} catch (error) {
 		console.warn('Failed to read the signed-in accounts', error)
 		minecraftAccounts.value = []
+	}
+	await refreshTjmcPermission()
+}
+
+async function refreshTjmcPermission() {
+	try {
+		tjmcPermission.value = await getTjmcPermission()
+	} catch (error) {
+		tjmcPermission.value = null
+		console.warn('Failed to read the skin site account permission', error)
 	}
 }
 
@@ -2791,9 +2807,9 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 			</NavRail>
 			<div class="h-px w-6 mx-auto my-2 bg-surface-5"></div>
 			<div class="quick-instance-scroll flex-1 min-h-0 overflow-x-hidden overflow-y-auto">
-				<suspense>
+				<Suspense v-if="stateInitialized">
 					<QuickInstanceSwitcher />
-				</suspense>
+				</Suspense>
 			</div>
 			<NavButton
 				v-if="AxolotlBrandConfig.capabilities.privateModrinthServices"
@@ -2840,7 +2856,7 @@ provideAppUpdateDownloadProgress(appUpdateDownload)
 			</div>
 			<section data-tauri-drag-region class="flex shrink-0 ml-auto items-center">
 				<div class="flex mr-3">
-					<Suspense>
+					<Suspense v-if="stateInitialized">
 						<AppActionBar />
 					</Suspense>
 				</div>

@@ -158,6 +158,8 @@ struct TokenResponse {
 struct UserInfoResponse {
     #[serde(default)]
     selected_profile: Option<YggdrasilProfile>,
+    #[serde(default)]
+    permission: Option<i32>,
 }
 
 #[derive(Deserialize)]
@@ -527,6 +529,26 @@ async fn fetch_selected_profile(
 
     let userinfo: UserInfoResponse = response.json().await?;
     Ok(userinfo.selected_profile)
+}
+
+pub(super) async fn fetch_user_permission(
+    access_token: &str,
+) -> crate::Result<Option<i32>> {
+    let provider = provider_metadata().await?;
+    let response = INSECURE_REQWEST_CLIENT
+        .get(&provider.userinfo_endpoint)
+        .header(ACCEPT, "application/json")
+        .header(reqwest::header::ACCEPT_LANGUAGE, "zh-CN")
+        .bearer_auth(access_token)
+        .send()
+        .await?;
+
+    if !response.status().is_success() {
+        return Err(response_error(response).await);
+    }
+
+    let userinfo: UserInfoResponse = response.json().await?;
+    Ok(userinfo.permission)
 }
 
 /// Reads `selectedProfile` out of an ID token without verifying it.

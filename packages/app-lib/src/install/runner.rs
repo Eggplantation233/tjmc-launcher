@@ -110,6 +110,24 @@ pub async fn create_modpack_instance(
     location: CreatePackLocation,
     post_install_edit: Option<InstallPostInstallEdit>,
 ) -> crate::Result<InstallJobSnapshot> {
+    let is_local_pack = matches!(
+        &location,
+        CreatePackLocation::FromFile { path: Some(_), .. }
+    );
+    if is_local_pack {
+        let permission =
+            crate::api::tjmc_permission::current_tjmc_permission().await?;
+        if !permission.is_some_and(
+            crate::api::tjmc_permission::is_tjmc_admin_permission,
+        ) {
+            return Err(crate::ErrorKind::InputError(
+                "Local modpack imports require skin site administrator permission."
+                    .to_string(),
+            )
+            .into());
+        }
+    }
+
     start(InstallRequest::CreateModpackInstance {
         location,
         post_install_edit,

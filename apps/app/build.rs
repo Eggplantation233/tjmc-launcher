@@ -205,6 +205,7 @@ fn main() {
                         "get_default_user",
                         "set_default_user",
                         "get_users",
+                        "get_tjmc_permission",
                     ])
                     .default_permission(
                         DefaultPermissionRule::AllowAllCommands,
